@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ajude Famílias Desabrigadas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#f4f7fb;
+}
+
+/* TOPO */
+header{
+background:linear-gradient(135deg,#0ea5e9,#22c55e);
+color:white;
+text-align:center;
+padding:60px 20px;
+}
+
+header h1{
+margin:0;
+font-size:32px;
+}
+
+/* CONTAINER */
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+/* CARD */
+.card{
+background:white;
+border-radius:15px;
+padding:25px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+margin-top:-50px;
+text-align:center;
+}
+
+/* IMAGEM */
+img{
+width:100%;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+/* META */
+progress{
+width:100%;
+height:30px;
+}
+
+.valor{
+font-size:22px;
+font-weight:600;
+margin:10px;
+color:#16a34a;
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:14px;
+font-size:16px;
+border-radius:8px;
+border:1px solid #ccc;
+margin-top:15px;
+}
+
+/* BOTÃO */
+button{
+margin-top:15px;
+width:100%;
+padding:14px;
+font-size:18px;
+background:#22c55e;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+/* RODAPÉ */
+footer{
+text-align:center;
+padding:30px;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Ajude Famílias Afetadas pelas Chuvas 🌧️</h1>
+<p>Sua doação leva comida, água e abrigo.</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+
+<h2>Meta Solidária</h2>
+
+<div class="valor" id="valor">
+R$ 0 arrecadados
+</div>
+
+<progress id="barra" value="0" max="10000"></progress>
+
+<input type="number" id="doacao" placeholder="Digite o valor da doação">
+
+<button onclick="doar()">Doar via Pix ❤️</button>
+
+</div>
+
+</div>
+
+<footer>
+Projeto solidário independente • Transparência total
+</footer>
+
+<script>
+
+let meta = 10000;
+let total = localStorage.getItem("total") || 0;
+
+function atualizar(){
+document.getElementById("valor").innerText =
+"R$ " + total + " arrecadados";
+document.getElementById("barra").value = total;
+}
+
+atualizar();
+
+function doar(){
+
+let valor = document.getElementById("doacao").value;
+
+if(valor <= 0){
+alert("Digite um valor válido");
+return;
+}
+
+// SUA CHAVE PIX DO PICPAY
+let chavePix = "SUA_CHAVE_PIX_AQUI";
+
+let link =
+`https://pix.pics/qr?v=${valor}&key=${chavePix}`;
+
+window.open(link,"_blank");
+
+total = Number(total) + Number(valor);
+localStorage.setItem("total", total);
+
+atualizar();
+}
+
+</script>
+
+</body>
+  </html>
